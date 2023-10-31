@@ -33,12 +33,6 @@ export function calcEvenPositions(mesh) {
 
     const neighbors = v.getNeighbors();
     const beta = neighbors.length === 3 ? 3 / 16 : 3 / (8 * neighbors.length);
- 
-
-    // if (i === 7){
-    //   console.log(v.position, v.halfEdge.edge.mesh.halfEdges.findIndex(he=>he === v.halfEdge));
-    //   debugger;
-    // }
 
     const newPosition = neighbors.reduce(
       (acc, ev) => acc.add(ev.position),
@@ -127,29 +121,13 @@ export function loopSubdivision(mesh) {
     const [v0, v1] = edge.ends();
     if (v0.odd) {
       v0.position = p;
-      // v0.odd = false;
+      v0.odd = false;
     } else {
       v1.position = p;
-      // v1.odd = false;
+      v1.odd = false;
     }
   });
 
 
-
-
-  const roundOffValue = (value) => (Math.round(value * 1000) / 1000);
-  mesh.vertices.forEach((v) => {
-   
-    v.position.x = roundOffValue(v.position.x);
-    v.position.y = roundOffValue(v.position.y);
-    v.position.z = roundOffValue(v.position.z);
-  });
-
-  mesh.vertices.forEach((v,i) => {
-    if (v.position.x === 0.759){
-      console.log(v.position, i, v.odd);
-    }
-    v.odd = false;
-  });
 
 }
